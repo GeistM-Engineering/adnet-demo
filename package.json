@@ -1,0 +1,19 @@
+{
+  "name": "journiest.thirdparty.company",
+  "version": "1.0.0",
+  "description": "Part of data-wallet-demos - Static travel articles from Journiest.com",
+  "license": "MIT",
+  "author": "GeistM",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "debug": "node --inspect=0.0.0.0:9229 index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@metric-im/administrate": "^1.1.1",
+    "epistery": "^1.0.5",
+    "express": "^5.1.0"
+  }
+}
