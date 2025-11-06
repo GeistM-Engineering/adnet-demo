@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@metric-im/administrate": "^1.1.1",
-    "epistery": "^1.0.5",
+    "epistery": "^1.0.6",
     "express": "^5.1.0"
   }
 }
