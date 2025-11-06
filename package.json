@@ -1,7 +1,7 @@
 {
-  "name": "journiest.thirdparty.company",
+  "name": "demo.blackfire.fish",
   "version": "1.0.0",
-  "description": "Part of data-wallet-demos - Static travel articles from Journiest.com",
+  "description": "Epistery adnet demo sandbox - Static travel articles from Journiest.com",
   "license": "MIT",
   "author": "GeistM",
   "type": "module",
@@ -12,8 +12,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@metric-im/administrate": "^1.1.1",
-    "epistery": "^1.0.6",
+    "@metric-im/administrate": "^1.1.6",
+    "epistery": "^1.1.0",
     "express": "^5.1.0"
   }
 }
