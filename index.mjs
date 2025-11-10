@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { Epistery } from 'epistery';
 import http from "http";
+import AdnetAgent from '../adnet-agent/index.mjs';
 
 // Get directory paths for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +17,23 @@ async function main() {
 
   const epistery = await Epistery.connect();
   await epistery.attach(app);
+
+  // Initialize and attach Adnet Agent
+  const adnetAgent = new AdnetAgent({
+    domain: 'demo.localhost', // Publisher domain
+    threshold: 5, // Post to contract after 5 events (for testing)
+    factoryUrl: process.env.ADNET_FACTORY_URL || 'http://localhost:4080' // For local testing
+  });
+
+  // Wait for agent initialization
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  adnetAgent.attach(app);
+
+  // Optional: Periodic flush every 5 minutes
+  setInterval(() => {
+    adnetAgent.periodicFlush();
+  }, 5 * 60 * 1000);
 
   // Serve static files (CSS, images, etc.)
   app.use('/public', express.static(path.join(__dirname, 'public')));
