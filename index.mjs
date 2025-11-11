@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { Epistery } from 'epistery';
+import { Epistery, Config } from 'epistery';
 import http from "http";
 import AdnetAgent from '../adnet-agent/index.mjs';
 
@@ -15,14 +15,17 @@ async function main() {
   app.use(express.json({limit: '50mb'}));
   app.use(express.urlencoded({extended: true}));
 
+  // Connect Epistery without parameters - it will auto-configure
   const epistery = await Epistery.connect();
   await epistery.attach(app);
 
+  // Load config for adnet agent settings
+  const config = new Config();
+  config.load();
+
   // Initialize and attach Adnet Agent
   const adnetAgent = new AdnetAgent({
-    domain: 'demo.localhost', // Publisher domain
-    threshold: 5, // Post to contract after 5 events (for testing)
-    factoryUrl: process.env.ADNET_FACTORY_URL || 'http://localhost:4080' // For local testing
+    threshold: 5 // Post to contract after 5 events (for testing)
   });
 
   // Wait for agent initialization
@@ -66,7 +69,7 @@ async function main() {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 
-  const PORT = process.env.PORT || 3009;
+  const PORT = parseInt(process.env.PORT || 3009);
 
   const http_server = http.createServer(app);
   http_server.listen(PORT);
