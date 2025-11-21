@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { Epistery, Config } from 'epistery';
+import { Epistery } from 'epistery';
 import http from "http";
 import AdnetAgent from '../adnet-agent/index.mjs';
 
@@ -19,11 +19,7 @@ async function main() {
   const epistery = await Epistery.connect();
   await epistery.attach(app);
 
-  // Load config for adnet agent settings
-  const config = new Config();
-  config.load();
-
-  // Initialize and attach Adnet Agent
+  // Initialize and attach Adnet Agent (loads its own config)
   const adnetAgent = new AdnetAgent({
     threshold: 5 // Post to contract after 5 events (for testing)
   });
